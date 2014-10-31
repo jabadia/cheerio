@@ -7,6 +7,14 @@ exports.fruits = [
   '</ul>'
 ].join('');
 
+exports.cities = [
+  '<div id="cities">',
+    '<span class="cityname">New York</span> state of New York',
+    '<span class="cityname">Chicago</span> state of Illinois',
+    '<span class="cityname">Los Angeles</span> state of California',
+  '</div>'
+].join('');
+
 exports.vegetables = [
   '<ul id="vegetables">',
     '<li class="carrot">Carrot</li>',

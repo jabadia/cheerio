@@ -2,6 +2,7 @@ var expect = require('expect.js'),
   cheerio = require('..'),
   food = require('./fixtures').food,
   fruits = require('./fixtures').fruits,
+  cities = require('./fixtures').cities,
   drinks = require('./fixtures').drinks,
   text = require('./fixtures').text;
 
@@ -179,6 +180,35 @@ describe('$(...)', function() {
       it('should accept elements that satisify the filter', function() {
         expect($('.apple').next('.orange')).to.have.length(1);
       });
+    });
+
+  });
+
+  describe('.next() not only tags', function() {
+
+    beforeEach(function() {
+      $ = cheerio.load(cities);
+    });
+
+    it('should traverse normally when second parameter is true or is not specified', function()
+    {
+      var firstChild = $('#cities').children(0);
+      expect( firstChild.next() ).to.have.length(1);
+      expect( firstChild.next().text() ).to.equal('Chicago');
+    });
+
+    it('should return text nodes when second parameter is false', function()
+    {
+      var firstChild = $('#cities').children(0);
+      expect( firstChild.next(undefined,false) ).to.have.length(1);
+      expect( firstChild.next(undefined,false).text() ).to.equal(' state of New York');
+    });
+
+    it('should still use selectors when second parameter is false', function()
+    {
+      var firstChild = $('#cities').children(0);
+      expect( firstChild.next('.cityname',false) ).to.have.length(1);
+      expect( firstChild.next('.cityname',false).text() ).to.equal('Chicago');
     });
 
   });
